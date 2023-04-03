@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/hrishik18/NGO-Management-System/issues"
   },
-  "homepage": "https://github.com/hrishik18/NGO-Management-System#readme"
+  "homepage": "https://github.com/hrishik18/NGO-Management-System#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.1",
+    "@truffle/hdwallet-provider": "^2.1.7",
+    "alchemy-sdk": "^2.4.3"
+  }
 }

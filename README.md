@@ -27,7 +27,10 @@ $ npm start
   Starting the development server...
 ```
 
+![image](https://user-images.githubusercontent.com/72657744/219967084-cff442a7-0e7e-4658-ab2f-e348c631bf3e.png)
+
 From there, follow the instructions on the hosted React app. It will walk you through using Truffle and Ganache to deploy the `SimpleStorage` contract, making calls to it, and sending transactions to change the contract's state.
+
 
 ## FAQ
 

@@ -1,0 +1,10 @@
+.homepage-container {
+    display: flex;
+  }
+  
+  .slideshow-container {
+    width: 50%;
+    height: 100%;
+    bottom:50;
+  }
+  
