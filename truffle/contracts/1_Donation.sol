@@ -59,7 +59,8 @@ contract Donation {
     }
     //donation for single request
     function Donate(uint _requestNo)public payable{
-        //require(msg.value>=minAmount,"Minimum Donation Amount not satisfied");
+        payable(msg.sender).transfer(msg.value);    
+        require(msg.value>=minAmount,"Minimum Donation Amount not satisfied");
         Request storage req = requests[_requestNo];
         DonorAmount[_requestNo][msg.sender] += msg.value;
         req.totalAmount +=msg.value;
@@ -75,8 +76,8 @@ contract Donation {
     }
 
 
-    function sendfund(address payable p,uint _amt)public payable {
-        address payable pq = payable(address(p));
-        token.transferFrom(org, pq, _amt);
+    function sendfund(address payable p)public payable {
+        //address payable pq = payable(address(p));
+        p.transfer(address(this).balance);
     }
 }
