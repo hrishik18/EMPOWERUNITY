@@ -4,7 +4,7 @@
     left: 0;
     height: 100%;
     width: 200px;
-    background-color: #E49393; /* change to your desired background color */
+    background-color: #617976; /* change to your desired background color */
     color: #fff; /* change to your desired text color */
     z-index: 999;
   }
@@ -14,7 +14,7 @@
     left: 0;
     height: 100%;
     width: 200px;
-    background-color: #F3DEBA; /* change to your desired background color */
+    background-color: #617976; /* change to your desired background color */
     color: #fff; /* change to your desired text color */
     z-index: 999;
     transform: translateX(-100%);

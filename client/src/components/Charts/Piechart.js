@@ -1,6 +1,5 @@
 import React, { Component,useEffect,useState } from 'react';
 import { CanvasJS, CanvasJSChart } from 'canvasjs-react-charts';
-import bg from "../images/background.png"
 import './Piechart.css'
 class Piechart extends Component {
 	render() {
@@ -9,11 +8,16 @@ class Piechart extends Component {
 			exportFileName: "Where does your money go?",
 			exportEnabled: true,
 			title:{
-				text: "Where does your money go?"
+				text: "Where does your money go?",
+				fontColor:"white"
 			},
-            height:320,
-            width:1700,
-            backgroundColor:'#FFF2CC',
+            height:250,
+            width:650,
+            backgroundColor:'transparent',
+			legend: {
+                fontColor: "#F3E99F"
+				// Change legend text color to black
+            },
 			data: [{
 				type: "pie",
 				showInLegend: true,

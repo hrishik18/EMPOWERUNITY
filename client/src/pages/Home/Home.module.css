@@ -1,47 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&family=Poppins&display=swap');
 .container{ position:relative;
   width: 100%;
-  height: 100vh;
-  background-image: url('../components/images/background.png');
+  height: 505px;
+  background-image: url('../../images/background.png');
   background-size: cover;
   background-position: center;
   z-index:10;}
-.navbar {
-  background-color: #F4B183;
-  display: flex;
-  justify-content: space-between;
-  /* align-items: center; */
-  padding: 15px;
-}
-.buttcontainer{
-  display: flex;
-}
-.name{
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-size: 30px;
-  color:#B46060;
- margin-left: 200px;
-}
-.box {
-  margin-right:20px;
-  background-color: #245953;
-  padding: 8px;
-  margin-left: 25px;
-}
-
-.button {
-  font-family: 'Montserrat Alternates', sans-serif;
-  background-color: #245953;
-  color:white;
-  text-decoration: solid;
-  border: none;
-  padding: 5px;
-  cursor: pointer;
-}
 .donate {
   font-family: 'Montserrat Alternates', sans-serif;
   background-color: transparent;
-  color:rgb(234, 185, 185);
   font-size: 50px;
   text-decoration: solid;
   border: none;
@@ -50,7 +17,7 @@
   width:600px;
   cursor: pointer;
   margin-left: 35%;
-  margin-top:10%;
+  margin-top:5%;
 }
 .donate {
 	color: #FFF;
@@ -64,8 +31,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 1;
-	background-color: rgba(225, 141, 56, 0.3);
+	background-color: rgba(61, 83, 78, 0.3);
 	transition: all 0.3s;
 }
 .donate:hover::before {
@@ -82,7 +48,8 @@
 	z-index: 1;
 	opacity: 0;
 	transition: all 0.3s;
-	border: 1px solid rgba(235, 205, 128, 0.5);
+  color:white;
+	border: 1px solid rgba(239, 238, 235, 0.5);
 	transform: scale(1.2,1.2);
 }
 .donate:hover::after {
