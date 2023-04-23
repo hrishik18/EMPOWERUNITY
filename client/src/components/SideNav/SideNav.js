@@ -19,7 +19,7 @@ const SideNav = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/transaction">Transaction</Link>
+            <Link to="/trans">Transaction</Link>
           </li>
           <li>
             <Link to="/transaction-history">Transaction History</Link>

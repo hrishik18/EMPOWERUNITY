@@ -4,7 +4,7 @@
     left: 0;
     height: 100%;
     width: 200px;
-    background-color: #333; /* change to your desired background color */
+    background-color: #617976; /* change to your desired background color */
     color: #fff; /* change to your desired text color */
     z-index: 999;
   }
@@ -14,7 +14,7 @@
     left: 0;
     height: 100%;
     width: 200px;
-    background-color: #333; /* change to your desired background color */
+    background-color: #617976; /* change to your desired background color */
     color: #fff; /* change to your desired text color */
     z-index: 999;
     transform: translateX(-100%);
@@ -33,14 +33,17 @@
   
   li {
     padding: 10px 20px;
+    margin-bottom: 20px;
   }
   
   li:hover {
-    background-color: #555; /* change to your desired hover color */
+    background-color:#FFD966; /* change to your desired hover color */
   }
   
   a {
-    color: #fff; /* change to your desired link color */
+    color: #262A56;
+    font-size: 20px;
+    font-family: 'Montserrat Alternates', sans-serif; /* change to your desired link color */
     text-decoration: none;
   }
   

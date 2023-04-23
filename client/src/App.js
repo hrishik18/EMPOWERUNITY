@@ -2,10 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"
-import React, { useEffect, useState } from 'react'
-import Web3 from 'web3';
-import contract from '../../truffle/build/contracts/Donation.json';
-//import contract.json 
+import React from 'react'
 
 function App() {
   const [web3, setweb3] = useState(null);
@@ -46,6 +43,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+      </Routes>
+      <Routes>
+        <Route path="/trans" element={<Transaction />} />
       </Routes>
     </Router>
   );
