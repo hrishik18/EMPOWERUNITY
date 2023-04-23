@@ -1,6 +1,7 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-// require('dotenv').config();
- const pvtKey = process.env["PRIVATE_KEY"];
+require('dotenv').config();
+const pvtKey = process.env["PRIVATE_KEY"];
+//console.log("The private key " + pvtKey);
 const fs = require('fs');
 
 module.exports = {
@@ -11,9 +12,10 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
     matic: {
-      provider: () => new HDWalletProvider(pvtKey, `https://polygon-mumbai.g.alchemy.com/v2/hhS4jyo33q4qCFlh_I2_Q-2_h3RoapUI`),
+      provider: () => new HDWalletProvider("a5f818522317524eb03a74020fc9ff0867b694161be996d3622807fa1299d7e3", `https://polygon-mumbai.g.alchemy.com/v2/SLJiYTHtDpNRz6tc5fDEcxnNqZZE3VMd`),
       network_id: 80001,
       confirmations: 2,
+      networkCheckTimeout: 10000,
       timeoutBlocks: 200,
       skipDryRun: true
     },
@@ -41,7 +43,7 @@ module.exports = {
  * them to suit your project as necessary.
  *
  * More information about configuration can be found at:
- * 
+ *
  * https://trufflesuite.com/docs/truffle/reference/configuration
  *
  * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)

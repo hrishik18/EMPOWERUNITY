@@ -1,7 +1,7 @@
 import React from 'react';
-import { Slide } from 'react-slideshow-image';
-import { useState,useEffect } from 'react';
-import 'react-slideshow-image/dist/styles.css';
+//import { Slide } from 'react-slideshow-image';
+import { useState, useEffect } from 'react';
+//import 'react-slideshow-image/dist/styles.css';
 import './Slideshow.css';
 import first from '../images/1.png';
 import second from '../images/2.png';

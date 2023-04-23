@@ -5,6 +5,8 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract Donation {
     IERC20 public token;
+    struct Request {
+        uint32 id;
         address creator;
         uint32 startAt;
         uint totalAmount;
