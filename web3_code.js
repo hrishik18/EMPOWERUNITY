@@ -1,8 +1,8 @@
-const Donate = artifacts.require("donate");
+// const Donate = artifacts.require("donate");
 
-module.exports = function (deployer) {
-    deployer.deploy(Donate);
-};
+// module.exports = function (deployer) {
+//     deployer.deploy(Donate);
+// };
 
 
 // const Web3 = require('web3');
