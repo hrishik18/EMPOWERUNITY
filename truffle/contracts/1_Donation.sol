@@ -4,31 +4,6 @@ pragma solidity >=0.8.0 <=0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 
-// totalSupply()
-
-// balanceOf(account)
-
-// transfer(recipient, amount)
-
-// allowance(owner, spender)
-
-// approve(spender, amount)
-
-// transferFrom(sender, recipient, amount)
-
-// increaseAllowance(spender, addedValue)
-
-// decreaseAllowance(spender, subtractedValue)
-
-// _transfer(sender, recipient, amount)
-
-// _mint(account, amount)
-
-// _burn(account, amount)
-
-// _approve(owner, spender, amount)
-
-// _burnFrom(account, amount)
 contract Donation is Context, ERC20 {
     IERC20 public token;
     struct Request {
@@ -61,7 +36,7 @@ contract Donation is Context, ERC20 {
     event FundSent(address recipient, uint amount);
 
     constructor() ERC20("NGO token", "NG") {
-        _mint(_msgSender(), 10000 * (10 ** uint256(16)));
+        _mint(msg.sender, 10000 * (10 ** uint256(16)));
         // name = "ExtremeSetup Token";
         // decimals = 16;
         // totalsupply_ = 1000000 * 10 ** uint(decimals);
@@ -102,7 +77,7 @@ contract Donation is Context, ERC20 {
 
     function Donate(uint _requestNo, uint _amt) public payable {
         //payable(msg.sender).transfer(msg.value);
-        require(_amt >= minAmount, "Minimum Donation Amount not satisfied");
+        // require(_amt >= minAmount, "Minimum Donation Amount not satisfied");
         Request storage req = requests[_requestNo];
         DonorAmount[_requestNo][msg.sender] += _amt;
         req.totalAmount += _amt;

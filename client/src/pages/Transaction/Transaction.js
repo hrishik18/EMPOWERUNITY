@@ -5,6 +5,7 @@ import SideNav from '../../components/SideNav/SideNav'
 import Amount from '../../components/Amount/Amount'
 import './transaction.css'
 
+
 function Transaction() {
   return (
     <div>

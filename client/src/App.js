@@ -1,20 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import Web3 from 'web3';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home"
-import React from 'react'
+import Home from "./pages/Home/Home"
+import Transaction from "./pages/Transaction/Transaction"
+import React,{useState,useEffect} from 'react'
 
 function App() {
-  const [web3, setweb3] = useState(null);
-  const [accounts, setaccounts] = useState(null);
-  const [contract, setcontract] = useState(null);
+  const [web3, setweb3] = useState(undefined);
+  const [accounts, setaccounts] = useState(undefined);
+  const [contract, setcontract] = useState(undefined);
 
   useEffect(() => {
     const init = async () => {
+      const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
       const value = web3.utils.toWei("0.01", "ether");
-      const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
       const accounts = await web3.eth.getAccounts();
       const networkId = await web3.eth.net.getId();
+      console.log(web3.eth.accounts)
+      console.log(accounts)
       const deployedNetwork = contract.networks[networkId];
       // const contract = new web3.eth.Contract(
       //   contract.abi,
