@@ -1,0 +1,49 @@
+.sidenav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #617976; /* change to your desired background color */
+    color: #fff; /* change to your desired text color */
+    z-index: 999;
+  }
+  .sidenav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: #617976; /* change to your desired background color */
+    color: #fff; /* change to your desired text color */
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .sidenav-open {
+    transform: translateX(0);
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+  
+  li:hover {
+    background-color:#FFD966; /* change to your desired hover color */
+  }
+  
+  a {
+    color: #262A56;
+    font-size: 20px;
+    font-family: 'Montserrat Alternates', sans-serif; /* change to your desired link color */
+    text-decoration: none;
+  }
+  

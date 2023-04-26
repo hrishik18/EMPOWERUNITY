@@ -18,7 +18,7 @@ module.exports = {
       networkCheckTimeout: 10000,
       timeoutBlocks: 200,
       skipDryRun: true
-    },
+    }
   },
 
   // Set default mocha options here, use special reporters etc.
