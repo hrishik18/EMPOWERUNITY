@@ -162,13 +162,13 @@ contract Donation is ERC20 {
         //payable(msg.sender).transfer(msg.value);
         //require(msg.value>=minAmount,"Minimum Donation Amount not satisfied");
         Request storage req = requests[_requestNo];
-        DonorAmount[_requestNo][msg.sender] += _amt;
-        req.totalAmount += _amt;
-        totalDonationAmount += _amt;
+        DonorAmount[_requestNo][msg.sender] += msg.value;
+        req.totalAmount += msg.value;
+        totalDonationAmount += msg.value;
         DonationCount += 1;
-        //token.approve(msg.sender, _amt);
-        //token.transferFrom(msg.sender, address(this), _amt);
-        payable(this.address).transfer(_amt);
+        //token.approve(msg.sender, msg.value);
+        //token.transferFrom(msg.sender, address(this), msg.value);
+        org.transfer(_amt);
     }
 
     function transferERC20(address to, uint256 amount) public {
