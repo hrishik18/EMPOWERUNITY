@@ -15,32 +15,32 @@ async function donate(amount) {
     to: donationContract.options.address,
     gasPrice: gasPrice,
     gas: gasLimit,
-    //value: web3.utils.toWei(amount.toString(), 'wei')
+    value: web3.utils.toWei(amount.toString(), 'ether')
   };
   // amount = web3.utils.toBN(amount);
   // console.log("Amount", amount);
   // console.log("type", typeof amount);
-  // donationContract.methods.Donate(requestNo, parseInt(amount)).send(tx).then((receipt) => {
-  //   console.log("receipt", receipt);
-  // }).catch((error) => {
-  //   console.log("error", error);
+  donationContract.methods.Donate(requestNo, parseInt(amount)).send(tx).then((receipt) => {
+    console.log("receipt", receipt);
+  }).catch((error) => {
+    console.log("error", error);
+  });
+
+  // donationContract.methods.Donate(requestNo, amount).send(tx, function (error, transactionHash) {
+  //   if (error) {
+  //     console.error('Error:', error);
+  //   } else {
+  //     console.log('Transaction hash:', transactionHash);
+  //   }
   // });
 
-  donationContract.methods.Donate(requestNo, amount).send(tx, function (error, transactionHash) {
-    if (error) {
-      console.error('Error:', error);
-    } else {
-      console.log('Transaction hash:', transactionHash);
-    }
-  });
-
-  donationContract.methods.msgVal()(tx, function (error, transactionHash) {
-    if (error) {
-      console.error('Error:', error);
-    } else {
-      console.log('Transaction hash:', transactionHash);
-    }
-  });
+  // donationContract.methods.msgVal()(tx, function (error, transactionHash) {
+  //   if (error) {
+  //     console.error('Error:', error);
+  //   } else {
+  //     console.log('Transaction hash:', transactionHash);
+  //   }
+  // });
 }
 
 function Amount() {

@@ -4,7 +4,7 @@ const ERC20 = artifacts.require("@openzeppelin/contracts/token/ERC20/utils/ERC20
 
 
 module.exports = async function (deployer) {
-  const value = web3.utils.toWei("1", "ether");
+  const value = web3.utils.toWei("3", "ether");
   const instance = await deployer.deploy(Donation, { value });   //, { value }
   const token = await deployer.deploy(ERC20, "NGO Token", "NG");
   const accounts = await web3.eth.getAccounts();
