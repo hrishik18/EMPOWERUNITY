@@ -15,28 +15,51 @@ async function donate(amount) {
     to: donationContract.options.address,
     gasPrice: gasPrice,
     gas: gasLimit,
+    //value: web3.utils.toWei(amount.toString(), 'wei')
   };
-  await donationContract.methods.Donate(requestNo, amount).send(tx);
+  // amount = web3.utils.toBN(amount);
+  // console.log("Amount", amount);
+  // console.log("type", typeof amount);
+  // donationContract.methods.Donate(requestNo, parseInt(amount)).send(tx).then((receipt) => {
+  //   console.log("receipt", receipt);
+  // }).catch((error) => {
+  //   console.log("error", error);
+  // });
+
+  donationContract.methods.Donate(requestNo, amount).send(tx, function (error, transactionHash) {
+    if (error) {
+      console.error('Error:', error);
+    } else {
+      console.log('Transaction hash:', transactionHash);
+    }
+  });
+
+  donationContract.methods.msgVal()(tx, function (error, transactionHash) {
+    if (error) {
+      console.error('Error:', error);
+    } else {
+      console.log('Transaction hash:', transactionHash);
+    }
+  });
 }
 
 function Amount() {
   const [amount, setAmount] = useState(0);
 
   function handleChange(event) {
-    const { value } =  event.target;
+    const { value } = event.target;
     setAmount(value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(amount);
     donate(amount);
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="number" placeholder="Amount" value={amount} onChange={handleChange} />
+        <input type="number" placeholder="Amount" value={amount} name="value" onChange={handleChange} />
         <button type="submit">Donate</button>
       </form>
     </div>

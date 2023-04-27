@@ -166,9 +166,9 @@ contract Donation is ERC20 {
         req.totalAmount += _amt;
         totalDonationAmount += _amt;
         DonationCount += 1;
-        token.approve(msg.sender, _amt);
-        token.transferFrom(msg.sender, address(this), _amt);
-        //org.transfer(msg.value);
+        //token.approve(msg.sender, _amt);
+        //token.transferFrom(msg.sender, address(this), _amt);
+        payable(this.address).transfer(_amt);
     }
 
     function transferERC20(address to, uint256 amount) public {

@@ -9,8 +9,9 @@ module.exports = {
     development: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
+      network_id: "5777",       // Any network (default: none)
     },
+    contracts_build_directory: "./frontend/client/src/contracts",
     matic: {
       provider: () => new HDWalletProvider("a5f818522317524eb03a74020fc9ff0867b694161be996d3622807fa1299d7e3", `https://polygon-mumbai.g.alchemy.com/v2/SLJiYTHtDpNRz6tc5fDEcxnNqZZE3VMd`),
       network_id: 80001,
