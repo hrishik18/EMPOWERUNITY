@@ -111,6 +111,7 @@ contract Donation is ERC20 {
         uint32 startAt;
         uint totalAmount;
         string description;
+        string title;
         address payable ToBePaid;
         uint maxAmount;
         //mapping(address => uint) Donoramount;
@@ -125,7 +126,16 @@ contract Donation is ERC20 {
     uint public minAmount;
     address payable public org;
 
-    // make events for frontend - Donate,getbal,refund
+    event Deposited(uint amount);
+    event RequestCreated(
+        uint id,
+        address creator,
+        string description,
+        string title,
+        uint32 startAt
+    );
+    event Donated(uint requestNo, address donor, uint amount);
+    event FundSent(address recipient, uint amount);
 
     constructor() payable ERC20("NGO token", "NG") {
         //token = IERC20(_token);
@@ -138,6 +148,7 @@ contract Donation is ERC20 {
 
     function makeRequest(
         string memory _description,
+        string memory _title,
         uint32 _startAt,
         uint32 _id,
         address payable _p,
@@ -152,10 +163,17 @@ contract Donation is ERC20 {
             totalAmount: 0,
             startAt: _startAt,
             description: _description,
+            title: _title,
             ToBePaid: _p,
             maxAmount: _maxAmt
         });
-        // emit MakeRequest(ReqCount,msg.sender,_description,_startAt,_id);
+        emit RequestCreated(
+            ReqCount,
+            msg.sender,
+            _description,
+            _title,
+            _startAt
+        );
     }
 
     function Donate(uint _requestNo, uint _amt) public payable {
@@ -169,6 +187,7 @@ contract Donation is ERC20 {
         //token.approve(msg.sender, msg.value);
         //token.transferFrom(msg.sender, address(this), msg.value);
         org.transfer(_amt);
+        emit Donated(_requestNo, msg.sender, _amt);
     }
 
     function transferERC20(address to, uint256 amount) public {
@@ -192,5 +211,6 @@ contract Donation is ERC20 {
         Request storage req = requests[_requestNo];
         //address payable pq = payable(address(p));  address payable p
         token.transferFrom(org, req.ToBePaid, _amt);
+        emit FundSent(req.ToBePaid, address(this).balance);
     }
 }
