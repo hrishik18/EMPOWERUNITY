@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './amount.css';
 import Popup from 'reactjs-popup';
 import Donation from '../../contracts/Donation.json';
@@ -7,17 +7,48 @@ import Web3 from 'web3';
 function useDonation() {
   const [submit, setsubmit] = useState(false);
   const [error, seterror] = useState("Donation Successful");
-  const [requestNo, setRequestNo] = useState(0);
+  const [requestNo, setrequestNo] = useState(0);
+  const [recipientAddress, setRecipientAddress] = useState("");
+  const [confirm, setconfirm] = useState(false)
+  const [isConfirm, setisConfirm] = useState(false)
+
+
+  useEffect(() => {
+
+    switch (requestNo) {
+      case 1:
+        setRecipientAddress("0xc763db31112A4cDD7FB659143CbD14F230057186"); // replace with actual address for schools
+        break;
+      case 2:
+        setRecipientAddress("0xBc6C28378E263a574696AA7c33C08fBA5E0f237c"); // replace with actual address for single moms
+        break;
+      case 3:
+        setRecipientAddress("0x55841324F673cA893b16aaEebd6c20d18C531872"); // replace with actual address for old age homes
+        break;
+      case 4:
+        setRecipientAddress("0xdC6BF302C12B7254fEC6A1CF57C5fd03B38Dc35a"); // replace with actual address for hospitals
+        break;
+      default:
+        setRecipientAddress("0xdC6BF302C12B7254fEC6A1CF57C5fd03B38Dc35a");
+        break;
+    }
+  }, [requestNo]);
 
   function handleSelect(e) {
-    setRequestNo(parseInt(e.target.value));
-  }
-
-  async function donate(amount,requestNo) {
-    const web3 = new Web3(Web3.givenProvider);
-    const donationContract = new web3.eth.Contract(Donation.abi, Donation.networks[5777].address);
-    const accounts = await web3.eth.getAccounts();
+    setrequestNo(parseInt(e.target.value));
+}
   
+
+  async function donate(amount, requestNo, recipientAddress) {
+    setisConfirm(false);
+    console.log("IS CONFIRM???",isConfirm)
+    const web3 = new Web3(Web3.givenProvider);
+    const donationContract = new web3.eth.Contract(
+      Donation.abi,
+      Donation.networks[5777].address
+    );
+    const accounts = await web3.eth.getAccounts();
+    console.log("ADDRESS CHECK",accounts[0])
     const gasPrice = await web3.eth.getGasPrice();
     const gasLimit = 6385876; // Set the gas limit to a value suitable for your contract
     const tx = {
@@ -25,40 +56,60 @@ function useDonation() {
       to: donationContract.options.address,
       gasPrice: gasPrice,
       gas: gasLimit,
-      value: web3.utils.toWei(amount.toString(), 'ether')
+      value: web3.utils.toWei(amount.toString(), "ether"),
     };
-    donationContract.methods.Donate(parseInt(requestNo), parseInt(amount)).send(tx).then((receipt) => {
-      setsubmit(true);
-      seterror("Donation Successful");
-      console.log("Receipt",receipt)
-      console.log("Request No is: ",requestNo)
-    }).catch((error) => {
-      setsubmit(true);
-      seterror("Error occured while donating! Please try again!");
-      console.log("error", error);
-    });
-  }
-
-  return [submit, donate,setsubmit,error,handleSelect,requestNo];
+  
+    // Call the donate function on the donation contract with the recipient address and amount
+    donationContract.methods
+      .Donate(requestNo, web3.utils.toWei(amount.toString(), "ether"), recipientAddress)
+      .send(tx)
+      .then((receipt) => {
+        setsubmit(true);
+        seterror("Donation Successful");
+        console.log("Receipt", receipt);
+        console.log("Request No is: ", requestNo);
+      })
+      .catch((error) => {
+        setsubmit(true);
+        seterror("Error occurred while donating! Please try again!");
+        console.log("error", error);
+      });
+    }
+  return [submit,donate,setsubmit,error,handleSelect,requestNo,setRecipientAddress,recipientAddress,confirm,setconfirm,isConfirm, setisConfirm];
 }
 
 function Amount() {
   const [amount, setAmount] = useState(0);
-  const [submit, donate,setsubmit,error,handleSelect,requestNo] = useDonation();
+  const [submit, donate,setsubmit,error,handleSelect,requestNo,setRecipientAddress,recipientAddress,confirm,setconfirm,isConfirm, setisConfirm] = useDonation();
 
+  const request = {
+    1: "Schools",
+    2: "Single Moms",
+    3: "Oldage homes",
+    4: "Hospitals"
+  };
+  
   function handleChange(event) {
     const { value } = event.target;
     setAmount(value);
   }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    donate(amount,requestNo);
-  }
+  useEffect(() => {
+    if (isConfirm) {
+      donate(amount, requestNo, recipientAddress);
+    }
+  }, [isConfirm]);
+  
+  // function handleSubmit(event) {
+  //   if(event)
+  //   event.preventDefault();
+  //   // setconfirm(false);
+  //   if(isConfirm)
+  //   donate(amount, requestNo, recipientAddress);
+  // }
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <div className="form">
       <div className="container">
         <input className="amount" type="number" placeholder="Amount" value={amount} name="value" onChange={handleChange} />
     
@@ -73,29 +124,57 @@ function Amount() {
     </ul>
   </div>
 </div>
-      <Popup trigger=
-                {<button className="btn-donate" type="submit" >Donate</button>}
-                modal nested>
-                {
-                    close => (
-                        submit && // Conditionally render Popup when submit is true
-                        <div className='modal'>
-                            <div className='content'>
-                                {error}
-                            </div>
-                            <div>
-                            <button className="btn-modal" onClick={() => {
-                                close();
-                                setsubmit(false);
-                            }}>
-                                X
-                            </button>
-                            </div>
-                        </div>
-                    )
-                }
-            </Popup>
-            </form>
+<Popup trigger=
+  {<button className="btn-donate"  onMouseUp={() => {
+    setconfirm(true)
+  }}>Donate</button>}
+  modal nested>
+  {
+    close => (
+      <React.Fragment>
+        {submit && (
+          <div className='modal'>
+            <div className='content'>
+              {error}
+            </div>
+            <div>
+              <button className="btn-modal" onClick={() => {
+                close();
+                setsubmit(false);
+              }}>
+                X
+              </button>
+            </div>
+          </div>
+        )}
+        {confirm && (
+          <div className='modal-confirm'>
+            <div className='content-confirm'>
+              Are you sure you want to donate {amount} ETH to {request[requestNo]}?
+            </div>
+            <div>
+              <button className="btn-confirm" type="button" onClick={()  =>{
+                 setconfirm(false);
+                 setisConfirm(true);
+              }}>
+                YES I CONFIRM
+              </button>
+              <button className="btn-modal" type="button" onClick={() => {
+                close();
+                setconfirm(false);
+              }}>
+                X
+              </button>
+            </div>
+          </div>
+        )}
+      </React.Fragment>
+    )
+  }
+</Popup>
+
+
+            </div>
     </div>
   );
 }

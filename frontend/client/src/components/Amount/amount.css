@@ -2,7 +2,7 @@
     stage: 0;
   }
   
-  form {
+  .form {
     margin-top:2%;
     margin-left:18%;
     flex-wrap: wrap;
@@ -65,6 +65,34 @@
   bottom: 20px;
   right: 70px;
 }
+.modal-confirm {
+  height: 200px;
+  width: 500px;
+  background-color: #41644A;
+  color: white;
+  position: fixed;
+  opacity: 90%;
+  top: 20%;
+  left: 38%;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+.content-confirm {
+  background-color: hsl(0, 50%, 80%);
+  color:#444;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 50px;
+  margin-top: 15%;
+  width: 450px;
+  height:30px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  bottom: 20px;
+  right: 70px;
+}
 
 .btn-modal {
   background-color: white;
@@ -77,6 +105,18 @@
   top: 10px;
   right: 10px;
 }
+.btn-confirm {
+  background-color: white;
+  color: #41644A;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left:10px;
+}
+
 
 /* Dropdown */
 .container {
