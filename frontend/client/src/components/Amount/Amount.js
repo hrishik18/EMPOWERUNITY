@@ -38,7 +38,7 @@ function useDonation() {
         setRecipientAddress(g_accounts[4]); // replace with actual address for hospitals
         break;
       default:
-        setRecipientAddress(g_accounts[4]);
+        setRecipientAddress(0);
         break;
     }
   }, [requestNo]);
@@ -57,7 +57,7 @@ function useDonation() {
       Donation.networks[5777].address
     );
     const accounts = await web3.eth.getAccounts();
-    console.log("ADDRESS CHECK",accounts[0])
+    console.log("ADDRESS CHECK",accounts[5])
     const gasPrice = await web3.eth.getGasPrice();
     const gasLimit = 6385876; // Set the gas limit to a value suitable for your contract
     const tx = {
@@ -92,6 +92,7 @@ function Amount() {
   const [submit, donate,setsubmit,error,handleSelect,requestNo,setRecipientAddress,recipientAddress,confirm,setconfirm,isConfirm, setisConfirm] = useDonation();
 
   const request = {
+    0:"",
     1: "Schools",
     2: "Single Moms",
     3: "Oldage homes",
