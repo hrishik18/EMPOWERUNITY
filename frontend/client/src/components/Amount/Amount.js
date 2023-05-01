@@ -4,6 +4,16 @@ import Popup from 'reactjs-popup';
 import Donation from '../../contracts/Donation.json';
 import Web3 from 'web3';
 
+const web3_g = new Web3("http://localhost:7545");
+//const value = web3_g.utils.toWei("0.01", "ether");
+var g_accounts;
+web3_g.eth.getAccounts().then((a) => {
+  console.log(a);
+  g_accounts = a;
+}).catch((error) => {
+  console.log(error);
+});
+
 function useDonation() {
   const [submit, setsubmit] = useState(false);
   const [error, seterror] = useState("Donation Successful");
@@ -14,22 +24,21 @@ function useDonation() {
 
 
   useEffect(() => {
-
     switch (requestNo) {
       case 1:
-        setRecipientAddress("0xc763db31112A4cDD7FB659143CbD14F230057186"); // replace with actual address for schools
+        setRecipientAddress(g_accounts[1]); // replace with actual address for schools
         break;
       case 2:
-        setRecipientAddress("0xBc6C28378E263a574696AA7c33C08fBA5E0f237c"); // replace with actual address for single moms
+        setRecipientAddress(g_accounts[2]); // replace with actual address for single moms
         break;
       case 3:
-        setRecipientAddress("0x55841324F673cA893b16aaEebd6c20d18C531872"); // replace with actual address for old age homes
+        setRecipientAddress(g_accounts[3]); // replace with actual address for old age homes
         break;
       case 4:
-        setRecipientAddress("0xdC6BF302C12B7254fEC6A1CF57C5fd03B38Dc35a"); // replace with actual address for hospitals
+        setRecipientAddress(g_accounts[4]); // replace with actual address for hospitals
         break;
       default:
-        setRecipientAddress("0xdC6BF302C12B7254fEC6A1CF57C5fd03B38Dc35a");
+        setRecipientAddress(g_accounts[4]);
         break;
     }
   }, [requestNo]);
