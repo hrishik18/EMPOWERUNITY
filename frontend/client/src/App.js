@@ -4,6 +4,7 @@ import Web3 from 'web3';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home"
 import Transaction from "./pages/Transaction/Transaction"
+import History from "./pages/History/History"
 import React, { useState, useEffect } from 'react'
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path="/trans" element={<Transaction />} />
+      </Routes>
+      <Routes>
+        <Route path="/history" element={<History />} />
       </Routes>
     </Router>
   );

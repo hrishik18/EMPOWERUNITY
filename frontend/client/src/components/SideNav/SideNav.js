@@ -22,7 +22,7 @@ const SideNav = () => {
             <Link to="/trans">Transaction</Link>
           </li>
           <li>
-            <Link to="/transaction-history">Transaction History</Link>
+            <Link to="/history">Transaction History</Link>
           </li>
           <li>
             <Link to="/contact-us">Contact Us</Link>
